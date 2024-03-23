@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmxjcb1k5djtq"]
+
+[ext_resource type="Script" path="res://CardParty.gd" id="1_l26ax"]
+[ext_resource type="PackedScene" uid="uid://brx724grmwr1u" path="res://playing_card.tscn" id="1_xj54v"]
+
+[node name="CardParty" type="Node2D"]
+script = ExtResource("1_l26ax")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(169, 97)
+zoom = Vector2(5, 5)
+
+[node name="PlayingCard" parent="." instance=ExtResource("1_xj54v")]
+position = Vector2(142, 100)
+
+[node name="PlayingCard2" parent="." instance=ExtResource("1_xj54v")]
+position = Vector2(214, 100)
+_CardFace = "Ad"
