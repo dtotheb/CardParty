@@ -10,6 +10,8 @@ var curCard = 0
 @export var FaceUp:bool = true
 
 var selected:bool = false
+signal card_selected
+signal card_unselected
 var mouse_in = false
 
 
@@ -59,6 +61,15 @@ func nextCard():
 	else:
 		curCard = 0
 		setCardFace(CardFaceMap.keys()[curCard])
+		
+		
+func selectCard():
+	selected = true
+	emit_signal("card_selected")
+	
+func unselectCard():
+	selected = false
+	emit_signal("card_unselected")
 
 func _on_area_2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -66,9 +77,11 @@ func _on_area_2d_input_event(viewport, event, shape_idx):
 			flipCard()
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if mouse_in:
-				selected =	true
+				selectCard()
 		else:
-			selected = false
+			unselectCard()
+			
+			
 
 
 			

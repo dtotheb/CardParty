@@ -4,6 +4,8 @@ var Cards = []
 var CD = CardDetails.new()
 var CardFaceMap = CD.getCardFaceMap("ancient")
 
+signal draw_card(cardFace)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,15 +29,14 @@ func drawCard():
 		var topCard = Cards[0]
 		Cards.remove_at(0)
 		setDeckSizeLabel(len(Cards))
-		return topCard
+		emit_signal("draw_card",topCard)
 	else:
 		print("Deck is Empty!")
 		return null
 	
 
 func on_click():
-	var newCard = drawCard()
-	print(newCard)
+	drawCard()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -49,3 +50,9 @@ func get_CardCount():
 	return len(Cards)
 
 
+
+
+func _on_area_2d_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			on_click()

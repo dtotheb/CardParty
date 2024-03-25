@@ -1,26 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmxjcb1k5djtq"]
+[gd_scene load_steps=6 format=3 uid="uid://bmxjcb1k5djtq"]
 
 [ext_resource type="Script" path="res://CardParty.gd" id="1_l26ax"]
 [ext_resource type="PackedScene" uid="uid://brx724grmwr1u" path="res://playing_card.tscn" id="1_xj54v"]
 [ext_resource type="PackedScene" uid="uid://d1wgmausox6dx" path="res://deck.tscn" id="3_n463g"]
 [ext_resource type="PackedScene" uid="uid://1wnkajshlmtl" path="res://player_hand.tscn" id="4_t1rnd"]
+[ext_resource type="PackedScene" uid="uid://bpx3jf57koxex" path="res://discard_pile.tscn" id="5_eub8h"]
 
 [node name="CardParty" type="Node2D"]
 script = ExtResource("1_l26ax")
+CardStyle = ExtResource("1_xj54v")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(200, 200)
 zoom = Vector2(5, 5)
 
 [node name="Deck" parent="." instance=ExtResource("3_n463g")]
-position = Vector2(198, 202)
+position = Vector2(155, 202)
 
-[node name="PlayerHand" parent="." instance=ExtResource("4_t1rnd")]
-position = Vector2(74, 267)
+[node name="PlayerHand1" parent="." instance=ExtResource("4_t1rnd")]
+position = Vector2(3, 269)
 PlayerName = "Dan"
-CardStyle = ExtResource("1_xj54v")
 
 [node name="PlayerHand2" parent="." instance=ExtResource("4_t1rnd")]
-position = Vector2(65, 13)
+position = Vector2(9, 15)
 PlayerName = "AI"
-CardStyle = ExtResource("1_xj54v")
+
+[node name="DiscardPile" parent="." instance=ExtResource("5_eub8h")]
+position = Vector2(251, 202)
+
+[connection signal="draw_card" from="Deck" to="." method="_on_deck_draw_card"]
