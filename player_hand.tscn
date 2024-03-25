@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://1wnkajshlmtl"]
+
+[ext_resource type="Script" path="res://player_hand.gd" id="1_pf5ab"]
+
+[node name="PlayerHand" type="Node2D"]
+script = ExtResource("1_pf5ab")
+
+[node name="PlayerLabel" type="Label" parent="."]
+offset_left = 1.0
+offset_right = 130.0
+offset_bottom = 23.0
+text = "Player1 - 0 Cards"
+
+[node name="MyCards" type="Node2D" parent="."]
+position = Vector2(34, 43)
