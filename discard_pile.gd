@@ -30,10 +30,16 @@ func highLight():
 func unhighLight():
 	$AnimatedSprite2D.scale = Vector2(1,1)
 	$AnimatedSprite2D.modulate = Color(1,1,1)
+	
+func getTopCard():
+	if len(Cards) > 0:
+		return Cards[-1]
+	else:
+		return null
 
-func playCard(Card):
-	print(Card._CardFace + " played")
-	Cards.append(Card)
+func addCard(Card):
+	Cards.append(Card._CardFace)
+	print(Cards)
 	showCardFace(Card._CardFace)
 	setDiscardPileLabel()
 	

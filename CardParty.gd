@@ -43,13 +43,40 @@ func _on_card_unselect_attempted(Card):
 	if dis_to_discard_pile < dropZoneDistance:
 		print("inside DropZone")
 		playerMap[activePlayer].removeCard(Card)
-		switchActivePlayer()
-
-		
-		$DiscardPile.playCard(Card)
-		Card.queue_free()
+		var TopCard = $DiscardPile.getTopCard()
+		if TopCard == null:
+			PlayCardToDiscardPile(Card)
+		else:
+			if compareCards(Card._CardFace, TopCard):
+				PlayCardToDiscardPile(Card)
+			else:
+				Card.unselectCardSuccessful()
+			
 	
 	$DiscardPile.unhighLight()
+	
+func PlayCardToDiscardPile(Card):
+	switchActivePlayer()
+	$DiscardPile.addCard(Card)
+	Card.queue_free()
+	
+
+func compareCards(cardFaceA:String, cardFaceB:String):
+	print("comparing: " + cardFaceA + " to " + cardFaceB)
+	var suitA = cardFaceA.substr(len(cardFaceA)-1)
+	var suitB = cardFaceB.substr(len(cardFaceB)-1)
+	var ValA = cardFaceA.substr(0,len(cardFaceA) -1)
+	var ValB = cardFaceB.substr(0,len(cardFaceB) -1)
+	if suitA == suitB:
+		print("Suits Match")
+		return true
+	elif ValA == ValB:
+		print("Val Match")
+		return true
+	else:
+		print("No Match")
+		return false
+	
 	
 func highlightActivePlayer():
 	print("Active Player: " + playerMap[activePlayer].PlayerName)
