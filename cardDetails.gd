@@ -102,4 +102,19 @@ func getCardFaceMap(deck:String="default"):
 		"9s": { "suit": "spades", "frame": 8, "score": 9 },
 		"10s": { "suit": "spades", "frame": 9, "score": 10 }
 	}
+	elif deck =="tinyFaces":
+		return {
+		"Jh": { "suit": "hearts", "frame": 10, "score": 10 },
+		"Qh": { "suit": "hearts", "frame": 11, "score": 10 },
+		"Kh": { "suit": "hearts", "frame": 12, "score": 10 },
+		"Jc": { "suit": "clubs", "frame": 10, "score": 10 },
+		"Qc": { "suit": "clubs", "frame": 11, "score": 10 },
+		"Kc": { "suit": "clubs", "frame": 12, "score": 10 },
+		"Jd": { "suit": "diamonds", "frame": 10, "score": 10 },
+		"Qd": { "suit": "diamonds", "frame": 11, "score": 10 },
+		"Kd": { "suit": "diamonds", "frame": 12, "score": 10},
+		"Js": { "suit": "spades", "frame": 10, "score": 10 },
+		"Qs": { "suit": "spades", "frame": 11, "score": 10 },
+		"Ks": { "suit": "spades", "frame": 12, "score": 10 }
+}
 

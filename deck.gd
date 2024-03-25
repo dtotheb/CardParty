@@ -2,7 +2,7 @@ extends Node2D
 
 var Cards = []
 var CD = CardDetails.new()
-var CardFaceMap = CD.getCardFaceMap("ancient")
+var CardFaceMap = CD.getCardFaceMap("tinyFaces")
 
 signal draw_card(cardFace)
 
