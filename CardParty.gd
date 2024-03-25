@@ -14,7 +14,15 @@ func setupPlayerMap():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	playerMap = setupPlayerMap()
+	setupGame()
 	highlightActivePlayer()
+	
+
+func setupGame(startingHandSize:int = 4):
+	for i in range(0, startingHandSize * 2):
+		var newCardFace = $Deck.drawCard()
+		switchActivePlayer()
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,8 +64,9 @@ func _on_card_unselect_attempted(Card):
 	$DiscardPile.unhighLight()
 	
 func PlayCardToDiscardPile(Card):
-	switchActivePlayer()
 	$DiscardPile.addCard(Card)
+	playerMap[activePlayer].addPointsToScore(Card.score)
+	switchActivePlayer()
 	Card.queue_free()
 	
 
@@ -91,9 +100,9 @@ func switchActivePlayer():
 func _on_deck_draw_card(cardFace):
 	print("Drew: ", cardFace)
 	var newCard = CardStyle.instantiate()
-	newCard._CardFace = cardFace
+	newCard.setCardFace(cardFace)
 	newCard.card_select_attempted.connect(_on_card_select_attempted)
 	newCard.card_unselect_attempted.connect(_on_card_unselect_attempted)
 	playerMap[activePlayer].addCard(newCard)
-	switchActivePlayer()
+	
 

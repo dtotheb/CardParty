@@ -13,6 +13,7 @@ var selected:bool = false
 signal card_select_attempted(cardFace)
 signal card_unselect_attempted(cardFace)
 var mouse_in = false
+var score = 0
 
 
 
@@ -32,6 +33,7 @@ func showCardBack():
 
 func setCardFace(CardFace:String):
 	_CardFace = CardFace
+	score = CardFaceMap[CardFace]["score"]
 	if FaceUp:
 		showCardFace()
 	else:

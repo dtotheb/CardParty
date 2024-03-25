@@ -2,8 +2,9 @@ extends Node2D
 
 var cardWidth = Vector2(50,0)
 @export var PlayerName:String = "Player1"
-@export var MaxHandSize : int = 5
+@export var MaxHandSize:int = 5
 var CardsInHand:int = 0
+var playerScore:int = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -25,7 +26,7 @@ func drawCardsInHand():
 
 
 func setPlayerLabel():
-	$PlayerLabel.text = PlayerName + " - " + str(CardsInHand) + "/" + str(MaxHandSize) + " Cards"
+	$PlayerLabel.text = PlayerName + " - " + str(playerScore) + " Points"
 
 func highlightPlayer():
 	$PlayerLabel.modulate = Color(1,0,0)
@@ -34,6 +35,9 @@ func unhighlightPlayer():
 	$PlayerLabel.modulate = Color(1,1,1)
 	
 
+func addPointsToScore(points:int):
+	playerScore = playerScore + points
+	setPlayerLabel()
 
 func addCard(Card):
 	$MyCards.add_child(Card)
