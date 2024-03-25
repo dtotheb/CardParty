@@ -9,23 +9,31 @@ func _ready():
 	Cards = []
 	$AnimatedSprite2D.animation = "cardBack"
 	$AnimatedSprite2D.frame = 0
+	setDiscardPileLabel()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 	
+func setDiscardPileLabel():
+	$Label.text = str(len(Cards)) + " Cards"
 	
 func showCardFace(cardFace):
 	$AnimatedSprite2D.animation = CardFaceMap[cardFace]["suit"]
 	$AnimatedSprite2D.frame = CardFaceMap[cardFace]["frame"]
 	
 func highLight():
-	scale = Vector2(1.2,1.2)
+	$AnimatedSprite2D.scale = Vector2(1.1,1.1)
+	$AnimatedSprite2D.modulate = Color(0.75,0,0)
 	
 func unhighLight():
-	scale = Vector2(1,1)
+	$AnimatedSprite2D.scale = Vector2(1,1)
+	$AnimatedSprite2D.modulate = Color(1,1,1)
 
-func playCard(cardFace):
-	print(cardFace + " played")
-	showCardFace(cardFace)
+func playCard(Card):
+	print(Card._CardFace + " played")
+	Cards.append(Card)
+	showCardFace(Card._CardFace)
+	setDiscardPileLabel()
+	

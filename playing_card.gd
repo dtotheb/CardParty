@@ -10,8 +10,8 @@ var curCard = 0
 @export var FaceUp:bool = true
 
 var selected:bool = false
-signal card_selected
-signal card_unselected
+signal card_selected(cardFace)
+signal card_unselected(cardFace)
 var mouse_in = false
 
 
@@ -65,11 +65,13 @@ func nextCard():
 		
 func selectCard():
 	selected = true
-	emit_signal("card_selected")
+	self.z_index = 1
+	emit_signal("card_selected", self)
 	
 func unselectCard():
 	selected = false
-	emit_signal("card_unselected")
+	self.z_index = 0
+	emit_signal("card_unselected", self)
 
 func _on_area_2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:

@@ -425,3 +425,10 @@ animation = &"cardBack"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropZone"]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_8vcbu")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -28.0
+offset_top = 27.0
+offset_right = 30.0
+offset_bottom = 50.0
+text = "0 Cards"

@@ -3,7 +3,7 @@ extends Node2D
 var cardWidth = Vector2(50,0)
 @export var PlayerName:String = "Player1"
 @export var MaxHandSize : int = 5
-var Cards = []
+var CardsInHand:int = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,17 +18,32 @@ func _process(delta):
 
 func drawCardsInHand():
 	var HandPOS = 0
-	for card in Cards:
-		card.position = $MyCards.position + (cardWidth * HandPOS )
-		HandPOS += 1
+	for card in $MyCards.get_children():
+		if is_instance_valid(card):
+			card.position = $MyCards.position + (cardWidth * HandPOS )
+			HandPOS += 1
 
 
 func setPlayerLabel():
-	$PlayerLabel.text = PlayerName + " - " + str(len(Cards)) + "/" + str(MaxHandSize) + " Cards"
+	$PlayerLabel.text = PlayerName + " - " + str(CardsInHand) + "/" + str(MaxHandSize) + " Cards"
+
+func highlightPlayer():
+	$PlayerLabel.modulate = Color(1,0,0)
+	
+func unhighlightPlayer():
+	$PlayerLabel.modulate = Color(1,1,1)
+	
 
 
 func addCard(Card):
-	Cards.append(Card)
 	$MyCards.add_child(Card)
+	CardsInHand += 1
 	setPlayerLabel()
 	drawCardsInHand()
+
+
+func removeCard(Card):
+	print("Removing " + Card._CardFace + " from " + PlayerName)
+	CardsInHand -= 1
+	drawCardsInHand()
+	setPlayerLabel()
