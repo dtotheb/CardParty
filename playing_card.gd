@@ -10,8 +10,8 @@ var curCard = 0
 @export var FaceUp:bool = true
 
 var selected:bool = false
-signal card_selected(cardFace)
-signal card_unselected(cardFace)
+signal card_select_attempted(cardFace)
+signal card_unselect_attempted(cardFace)
 var mouse_in = false
 
 
@@ -63,15 +63,25 @@ func nextCard():
 		setCardFace(CardFaceMap.keys()[curCard])
 		
 		
-func selectCard():
+func selectCardAttempted():
+	emit_signal("card_select_attempted", self)
+	
+func selectCardSuccessful():
 	selected = true
 	self.z_index = 1
-	emit_signal("card_selected", self)
-	
-func unselectCard():
+
+func selectCardUnSuccessful():
 	selected = false
 	self.z_index = 0
-	emit_signal("card_unselected", self)
+	
+func unselectCardAttempted():
+	selected = false
+	self.z_index = 0
+	emit_signal("card_unselect_attempted", self)
+
+func unselectCardSuccessful():
+	selected = false
+	self.z_index = 0
 
 func _on_area_2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -79,9 +89,9 @@ func _on_area_2d_input_event(viewport, event, shape_idx):
 			flipCard()
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if mouse_in:
-				selectCard()
+				selectCardAttempted()
 		else:
-			unselectCard()
+			unselectCardAttempted()
 			
 			
 

@@ -22,16 +22,19 @@ func _process(delta):
 	pass
 
 
-func _on_card_selected(Card):
+func _on_card_select_attempted(Card):
 	print(Card._CardFace + " selected")
 	$DiscardPile.highLight()
 	#check if selectedCard is owned by the ActivePlayer's Hand:
 	if Card.get_parent().get_parent().PlayerName == playerMap[activePlayer].PlayerName:
 		print("card owned by activePlayer")
+		Card.selectCardSuccessful()
 	else:
+		Card.selectCardUnSuccessful()
+		$DiscardPile.unhighLight()
 		print("card owned by inactivePlayer")
 
-func _on_card_unselected(Card):
+func _on_card_unselect_attempted(Card):
 	var current_mouse_pos = get_global_mouse_position()
 	var discard_pile_pos = $DiscardPile.global_position
 	var dropZoneDistance = 50
@@ -40,6 +43,7 @@ func _on_card_unselected(Card):
 	if dis_to_discard_pile < dropZoneDistance:
 		print("inside DropZone")
 		playerMap[activePlayer].removeCard(Card)
+		switchActivePlayer()
 
 		
 		$DiscardPile.playCard(Card)
@@ -52,12 +56,17 @@ func highlightActivePlayer():
 	playerMap[activePlayer].highlightPlayer()
 	playerMap[activePlayer * -1].unhighlightPlayer()
 	
+	
+func switchActivePlayer():
+	activePlayer = activePlayer * -1
+	highlightActivePlayer()
+	
 func _on_deck_draw_card(cardFace):
 	print("Drew: ", cardFace)
 	var newCard = CardStyle.instantiate()
 	newCard._CardFace = cardFace
-	newCard.card_selected.connect(_on_card_selected)
-	newCard.card_unselected.connect(_on_card_unselected)
+	newCard.card_select_attempted.connect(_on_card_select_attempted)
+	newCard.card_unselect_attempted.connect(_on_card_unselect_attempted)
 	playerMap[activePlayer].addCard(newCard)
-	activePlayer = activePlayer * -1
-	highlightActivePlayer()
+	switchActivePlayer()
+
