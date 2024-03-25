@@ -10,6 +10,7 @@ var curCard = 0
 @export var FaceUp:bool = true
 
 var selected:bool = false
+var mouse_in = false
 
 
 
@@ -47,8 +48,8 @@ func flipCard():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if selected:
-		self.position = get_global_mouse_position()
-		print(self.position)
+		global_position = get_global_mouse_position()
+		
 	
 	
 func nextCard():
@@ -59,16 +60,24 @@ func nextCard():
 		curCard = 0
 		setCardFace(CardFaceMap.keys()[curCard])
 
-"""
 func _on_area_2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			flipCard()
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			selected = !selected
-
-func _unhandled_input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if mouse_in:
+				selected =	true
+		else:
 			selected = false
-"""
+
+
+			
+func _on_area_2d_mouse_entered():
+	mouse_in = true
+	scale = Vector2(1.1,1.1)
+	
+func _on_area_2d_mouse_exited():
+	mouse_in = false
+	scale = Vector2(1,1)
+
+

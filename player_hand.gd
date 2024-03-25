@@ -4,7 +4,7 @@ var cardWidth = Vector2(50,0)
 @export var PlayerName:String = "Player1"
 @export var MaxHandSize : int = 5
 @export var CardStyle:PackedScene
-var Cards = []
+var Cards = ['Ah','Ad','As','Ac']
 
 
 # Called when the node enters the scene tree for the first time.
