@@ -410,7 +410,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8vcbu"]
-size = Vector2(53, 68)
+size = Vector2(40, 58)
 
 [node name="DiscardPile" type="Node2D"]
 script = ExtResource("1_18kps")
@@ -423,12 +423,12 @@ animation = &"cardBack"
 [node name="DropZone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropZone"]
-position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_8vcbu")
 
 [node name="Label" type="Label" parent="."]
+texture_filter = 1
 offset_left = -28.0
-offset_top = 27.0
+offset_top = 32.0
 offset_right = 30.0
-offset_bottom = 50.0
+offset_bottom = 55.0
 text = "0 Cards"

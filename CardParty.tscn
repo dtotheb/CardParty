@@ -28,4 +28,13 @@ PlayerName = "AI"
 [node name="DiscardPile" parent="." instance=ExtResource("5_eub8h")]
 position = Vector2(251, 202)
 
+[node name="Button" type="Button" parent="."]
+offset_left = 181.0
+offset_top = 174.0
+offset_right = 226.0
+offset_bottom = 228.0
+text = "Pass
+Turn"
+
 [connection signal="draw_card" from="Deck" to="." method="_on_deck_draw_card"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

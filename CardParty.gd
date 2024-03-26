@@ -66,8 +66,9 @@ func _on_card_unselect_attempted(Card):
 func PlayCardToDiscardPile(Card):
 	$DiscardPile.addCard(Card)
 	playerMap[activePlayer].addPointsToScore(Card.score)
+	playerMap[activePlayer].removeCard(Card)
 	switchActivePlayer()
-	Card.queue_free()
+	
 	
 
 func compareCards(cardFaceA:String, cardFaceB:String):
@@ -95,6 +96,7 @@ func highlightActivePlayer():
 	
 func switchActivePlayer():
 	activePlayer = activePlayer * -1
+	playerMap[activePlayer].drawCardsInHand()
 	highlightActivePlayer()
 	
 func _on_deck_draw_card(cardFace):
@@ -106,3 +108,7 @@ func _on_deck_draw_card(cardFace):
 	playerMap[activePlayer].addCard(newCard)
 	
 
+
+
+func _on_button_pressed():
+	switchActivePlayer()

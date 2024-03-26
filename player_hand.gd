@@ -49,5 +49,6 @@ func addCard(Card):
 func removeCard(Card):
 	print("Removing " + Card._CardFace + " from " + PlayerName)
 	CardsInHand -= 1
+	Card.queue_free()
 	drawCardsInHand()
 	setPlayerLabel()
