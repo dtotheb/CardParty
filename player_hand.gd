@@ -7,6 +7,7 @@ var CardsInHand:int = 0
 var playerScore:int = 0
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setPlayerLabel()
@@ -45,6 +46,8 @@ func addCard(Card):
 	setPlayerLabel()
 	drawCardsInHand()
 
+func getCardCount():
+	return len($MyCards.get_children())
 
 func removeCard(Card):
 	print("Removing " + Card._CardFace + " from " + PlayerName)

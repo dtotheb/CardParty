@@ -432,3 +432,5 @@ offset_top = 32.0
 offset_right = 30.0
 offset_bottom = 55.0
 text = "0 Cards"
+
+[node name="DiscardedCards" type="Node2D" parent="."]

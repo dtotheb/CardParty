@@ -14,7 +14,7 @@ signal card_select_attempted(cardFace)
 signal card_unselect_attempted(cardFace)
 var mouse_in = false
 var score = 0
-
+var CardPOSatSelectAttempt:Vector2
 
 
 
@@ -38,6 +38,10 @@ func setCardFace(CardFace:String):
 		showCardFace()
 	else:
 		showCardBack()
+		
+		
+func getCardFace():
+	return _CardFace
 
 	
 func flipCard():
@@ -66,6 +70,7 @@ func nextCard():
 		
 		
 func selectCardAttempted():
+	CardPOSatSelectAttempt = global_position
 	emit_signal("card_select_attempted", self)
 	
 func selectCardSuccessful():
@@ -82,6 +87,8 @@ func unselectCardAttempted():
 	emit_signal("card_unselect_attempted", self)
 
 func unselectCardSuccessful():
+	print("invalid Play returning card to hand")
+	global_position = CardPOSatSelectAttempt
 	selected = false
 	self.z_index = 0
 

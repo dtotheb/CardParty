@@ -38,8 +38,8 @@ func getTopCard():
 		return null
 
 func addCard(Card):
+	Card.reparent($DiscardedCards)
 	Cards.append(Card._CardFace)
-	print(Cards)
 	showCardFace(Card._CardFace)
 	setDiscardPileLabel()
 	
